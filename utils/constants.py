@@ -12,3 +12,11 @@ NCBI_NSG_GENE_DATA = os.path.join(__dir_name__, "./../dataset/swab_gene_counts.c
 NCBI_PATIENT_GENE_DATA = os.path.join(
     __dir_name__, "./../dataset/patient_gene_merged.csv"
 )
+
+ANNOTATION_GENE_TO_NAME = os.path.join(
+    __dir_name__, "./../dataset/gene2name.txt"
+)
+
+LIME_EXPLANATION_HTML = os.path.join(
+    __dir_name__, "./../lime/explanation.html"
+)

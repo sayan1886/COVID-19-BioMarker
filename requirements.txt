@@ -6,5 +6,7 @@ imutils
 numpy
 scikit-learn
 imblearn
+lightgbm
 lime
 ipython
+shap
