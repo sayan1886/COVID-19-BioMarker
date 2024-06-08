@@ -62,14 +62,14 @@ def get_train_and_test_data():
     # Use label encode to encode categorical values 
     # https://www.analyticsvidhya.com/blog/2015/11/easy-methods-deal-categorical-variables-predictive-modeling/?utm_source=blog&utm_medium=Categorical_data_encoding
     number = LabelEncoder()
-    print("before encoding")
-    print("gender: \n", data["gender"])
-    print("SC2: \n",data["SC2_PCR"])
+    # print("before encoding")
+    # print("gender: \n", data["gender"])
+    # print("SC2: \n",data["SC2_PCR"])
     data["gender"] = number.fit_transform(data["gender"].astype('str'))
     data["SC2_PCR"] = number.fit_transform(data["SC2_PCR"].astype('str'))
-    print("after encoding")
-    print("gender: \n", data["gender"])
-    print("SC2: \n",data["SC2_PCR"])
+    # print("after encoding")
+    # print("gender: \n", data["gender"])
+    # print("SC2: \n",data["SC2_PCR"])
     X = data.drop("SC2_PCR", axis=1)
     y = data["SC2_PCR"]
     ## split into train test sets

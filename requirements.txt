@@ -10,3 +10,4 @@ lightgbm
 lime
 ipython
 shap
+xgboost
