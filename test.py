@@ -29,10 +29,15 @@ def prob(data):
     return model.predict_proba(data).astype(float)
 
 X_train, X_test, y_train, y_test = preprocess.get_train_and_test_data()
-
+# TODO: try use GAN instead of SVMSMOTE to create more data
 smote = SVMSMOTE(random_state = 42, sampling_strategy=0.85, k_neighbors=10)
 X_resampled_train, y_resampled_train = smote.fit_resample(X_train, y_train)
 
+# TODO: try with all the feature and present result
+# Compare with multiple feature selections algorithm 
+# try to take union of all the various selected feature from different algos and compare
+
+# TODO: try use other feature selection methods for better comparison 
 # Fit the model in LASSO
 lassoreg = LassoCV(cv=10, max_iter=5000, tol=1e-2) #(alpha=0.01, max_iter=1000)
 # lassoreg = Lasso(alpha=0.02, max_iter=1000)
@@ -81,6 +86,7 @@ model.fit(X_train_selected, y_resampled_train)
 # # training the lightgbm model
 # model = lgb.train(lgb_params,lgb_train,num_boost_round=20,valid_sets=lgb_eval)
 
+# TODO: TRY to use 1D-CNN as classifier 
 
 # r2-score for train data
 y_pred_train = model.predict(X_train_selected)
@@ -128,15 +134,16 @@ exp.save_to_file(constants.LIME_EXPLANATION_HTML)
 # exp.visualize_instance_html(show_table=True)
 
 # Initialize SHAP
-shapExplainer = shap.Explainer(model=model, feature_names=X_resampled_train.columns)
+shapExplainer = shap.Explainer(model=model, feature_names=selected_features)
 
 # Evaluate SHAP values for entire test set
-shap_values = shapExplainer.shap_values(X_test_selected)
+shap_values = shapExplainer(X_test_selected)
 
 print("SHAP Explainer: ", shap_values)
 # Plot SHAP summry 
 shap.summary_plot(shap_values, feature_names=feature_names)
-shap.summary_plot(shap_values[1], X_test_selected)
-# shap.plots.force(shapExplainer.expected_value[0], shap_values[0][0,:], X_test_selected[0, :], matplotlib = True, feature_names=feature_names)
+shap.summary_plot(shap_values, X_test_selected, plot_type="bar")
+# shap.dependence_plot("age", shap_values, X_test_selected)
+# shap.summary_plot(shap_values[0], X_test_selected)
 
 plt.show() 
