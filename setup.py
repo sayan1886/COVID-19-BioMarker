@@ -9,15 +9,15 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='CAM',
-    version='1.3.0',
-    description='A Class Activaton Mapping implementation Tensorflow and Keras',
-    long_description='A Class Activaton Mapping e.g CAM, GRAD-CAM',
+    name='COVID-19-BioMarker',
+    version='1.1.0',
+    description='A study of Covid-19 Gene Biomarkers',
+    long_description='A study of Covid-19 Gene Biomarkers',
     url='https://github.com/sayan1886/CAM',
     author='Sayan Chatterjee',
     author_email='sayan1886@gmail.com',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    keywords='cam grad-cam tf keras xai',
+    keywords='keras scikit-learn imblearn shap lime xgboost xai explanations gene biomarker covid-19',
     license='MIT',
-    install_requires=['tensorflow', 'keras', 'opencv-python', 'imutils', 'numpy', 'scipy', 'pillow'],
+    install_requires=['matplotlib', 'pandas', 'numpy', 'tensorflow', 'scikit-learn', 'imbalanced-learn', 'lightgbm', 'xgboost', 'lime', 'shap' ],
 )
