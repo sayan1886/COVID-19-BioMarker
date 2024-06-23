@@ -8,6 +8,13 @@ import matplotlib.pyplot as plt
 from utils import explanations, models, preprocess, feature_selection as fs, sampling
 
 from configs import config
+from utils.constants import (
+    SHAP_EXPLANATION_GLOBAL_PLOT,
+    SHAP_EXPLANATION_BAR_PLOT,
+    SHAP_EXPLANATION_CLUSTER_PLOT,
+    SHAP_EXPLANATION_SCATTER_PLOT
+)
+
 
 
 # load data preprocess data
@@ -69,9 +76,14 @@ if cfg.explanation.shap:
     shap_values=explanations.shap_explanations(model=model, feature_names=selected_features, X_test=X_test)
     
     # Plot SHAP summary 
-    shap.summary_plot(shap_values, feature_names=selected_features)
+    fig = shap.summary_plot(shap_values, feature_names=selected_features, show=False)
+    plt.savefig(SHAP_EXPLANATION_GLOBAL_PLOT, dpi=300, bbox_inches='tight')
+    plt.close(fig=fig)
+    
     if cfg.explanation.shap_bar_plot:
-        shap.summary_plot(shap_values, X_test, plot_type="bar")
+        fig = shap.summary_plot(shap_values, X_test, plot_type="bar", show=False)
+        plt.savefig(SHAP_EXPLANATION_BAR_PLOT, dpi=300, bbox_inches='tight')
+        plt.close(fig=fig)
         
     i = randint(0, len(selected_features) - 1)
     selected_feature = selected_features[i]
@@ -92,9 +104,10 @@ if cfg.explanation.shap:
     
     if cfg.explanation.shap_cluster:
         clustering = shap.utils.hclust(X_test, y_test, random_state=42)
-        shap.plots.bar(shap_values, clustering=clustering, clustering_cutoff=0.5)
+        fig = shap.plots.bar(shap_values, clustering=clustering, clustering_cutoff=0.5, show=False)
+        plt.savefig(SHAP_EXPLANATION_CLUSTER_PLOT, dpi=300, bbox_inches='tight')
+        plt.close(fig=fig)
     
     if cfg.explanation.shap_scatter:
-        shap.plots.scatter(shap_values[:, selected_feature])
-        
-    plt.show() 
+        fig = shap.plots.scatter(shap_values[:, selected_feature], show=False)
+        plt.savefig(SHAP_EXPLANATION_SCATTER_PLOT, dpi=300, bbox_inches='tight')

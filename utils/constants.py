@@ -23,3 +23,17 @@ LIME_EXPLANATION_DIR = os.path.join(__dir_name__, "lime")
 LIME_EXPLANATION_HTML = os.path.join(
     LIME_EXPLANATION_DIR, "explanation.html"
 )
+
+SHAP_EXPLANATION_DIR = os.path.join(__dir_name__, "shap")
+SHAP_EXPLANATION_GLOBAL_PLOT = os.path.join(
+    SHAP_EXPLANATION_DIR, "shap_global.png"
+)
+SHAP_EXPLANATION_BAR_PLOT = os.path.join(
+    SHAP_EXPLANATION_DIR, "shap_bar.png"
+)
+SHAP_EXPLANATION_CLUSTER_PLOT = os.path.join(
+    SHAP_EXPLANATION_DIR, "shap_cluster.png"
+)
+SHAP_EXPLANATION_SCATTER_PLOT = os.path.join(
+    SHAP_EXPLANATION_DIR, "shap_scatter.png"
+)

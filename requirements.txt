@@ -1,13 +1,10 @@
 matplotlib
 pandas
-tensorflow
-opencv-python
-imutils
 numpy
+tensorflow
 scikit-learn
 imbalanced-learn
 lightgbm
 lime
-ipython
 shap
 xgboost

@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divM0SY0UVFPPCR9P5"></div>
+        <div class="lime top_div" id="top_div4ALE16BFAAN97BT"></div>
         
         <script>
-        var top_div = d3.select('#top_divM0SY0UVFPPCR9P5').classed('lime top_div', true);
+        var top_div = d3.select('#top_div4ALE16BFAAN97BT').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["POSITIVE", "NEGATIVE"], [0.05003058910369873, 0.9499694108963013]);
+            var pp = new lime.PredictProba(pp_svg, ["POSITIVE", "NEGATIVE"], [0.1470733880996704, 0.8529266119003296]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["POSITIVE", "NEGATIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["IFI27 > 1382.75", 0.5333548304200757], ["GLUL > 8523.75", -0.3260554336709749], ["FAM83A > 2419.75", 0.18131784322915995], ["SCGB1A1 > 844.25", -0.09356580910327926], ["MUC5B > 1777.00", -0.047043346423080175], ["4025.00 < FTL <= 8073.25", -0.022233543839265915], ["3681.50 < CD74 <= 6960.00", 0.01075192125873273], ["27603.50 < MT-ND6 <= 55079.00", 0.006519257327915493]], 1, exp_div);
+                exp.show([["155.75 < IFI27 <= 478.00", -0.24059454837779778], ["FAM83A > 2419.75", 0.20799934830902814], ["217.00 < MUC5B <= 652.50", 0.07335373251252165], ["2431.25 < FTL <= 4025.00", 0.05511357384690107], ["35.00 < SCGB1A1 <= 275.00", -0.039388580156289696], ["4796.00 < GLUL <= 8523.75", -0.02994259351349302], ["3681.50 < CD74 <= 6960.00", 0.002810092342365249], ["27603.50 < MT-ND6 <= 55079.00", 0.00018889249503735865]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["IFI27", "2169.00", 0.5333548304200757], ["GLUL", "9779.00", -0.3260554336709749], ["FAM83A", "3224.00", 0.18131784322915995], ["SCGB1A1", "1716.00", -0.09356580910327926], ["MUC5B", "6550.00", -0.047043346423080175], ["FTL", "5004.00", -0.022233543839265915], ["CD74", "5951.00", 0.01075192125873273], ["MT-ND6", "35502.00", 0.006519257327915493]], 1, raw_div);
+            exp.show_raw_tabular([["IFI27", "363.00", -0.24059454837779778], ["FAM83A", "3108.00", 0.20799934830902814], ["MUC5B", "459.00", 0.07335373251252165], ["FTL", "2769.00", 0.05511357384690107], ["SCGB1A1", "126.00", -0.039388580156289696], ["GLUL", "4978.00", -0.02994259351349302], ["CD74", "3912.00", 0.002810092342365249], ["MT-ND6", "44790.00", 0.00018889249503735865]], 1, raw_div);
         
         </script>
         </body></html>
