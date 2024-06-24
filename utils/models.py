@@ -76,8 +76,8 @@ def train_and_predict_using_lightgbm_classifier(X_train, X_test, y_train, y_test
     # Evaluate the model 
     y_pred = model.predict(X_test) 
     print("r2 score on test data: ", r2_score(y_test, y_pred))
-    print('The accuracy of the model on test data:\t',accuracy_score(y_true=y_test,y_pred=y_pred))
-    print("classification report on test data:\n", classification_report(y_true=y_test, y_pred=y_pred))
+    # print('The accuracy of the model on test data:\t',accuracy_score(y_true=y_test,y_pred=y_pred))
+    # print("classification report on test data:\n", classification_report(y_true=y_test, y_pred=y_pred))
     return model 
 
 # TODO: TRY to use 1D-CNN as classifier 

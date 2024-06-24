@@ -6,8 +6,6 @@ from utils import explanations, models, preprocess, feature_selection as fs, sam
 from configs import config
 
 
-
-
 # load data preprocess data
 data = None
 data = preprocess.load_data()
@@ -62,8 +60,8 @@ if cfg.explanation.lime:
                                    predict_fn=predict_fn, py_plot=cfg.explanation.lime_plot)
     
 if cfg.explanation.shap:
-    shap_values=explanations.shap_explanations(model=model, feature_names=selected_features, 
-                                               X_test=X_test, y_test=y_test, 
+    shap_values=explanations.shap_explanations(model=model, feature_names=np.array(selected_features), 
+                                               X_test=np.array(X_test), y_test=y_test, 
                                                shap_bar_plot=cfg.explanation.shap_bar_plot,
                                                shap_cluster=cfg.explanation.shap_cluster,
                                                shap_scatter=cfg.explanation.shap_scatter,)

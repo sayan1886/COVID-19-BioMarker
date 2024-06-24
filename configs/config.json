@@ -1,13 +1,13 @@
 {
-    "sampling" : "none",
+    "sampling" : "svm",
     "selection" : "lasso",
     "classification": "xgb",
     "explanation": {
         "lime" : true,
         "lime_plot": false,
         "shap": true,
-        "shap_bar_plot": true,
-        "shap_cluster": true,
-        "shap_scatter": true
+        "shap_bar_plot": false,
+        "shap_cluster": false,
+        "shap_scatter": false
     }
 }
