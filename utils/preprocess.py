@@ -1,8 +1,9 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+import numpy as np
 
 from os import path
 
+from sklearn.preprocessing import LabelEncoder
 # split a dataset into train and test sets
 from sklearn.model_selection import train_test_split
 
@@ -12,6 +13,18 @@ from utils.constants import (
     NCBI_PATIENT_GENE_DATA,
     ANNOTATION_GENE_TO_NAME,
 )
+
+class renamer():
+    def __init__(self):
+        self.d = dict()
+
+    def __call__(self, x):
+        if x not in self.d:
+            self.d[x] = 0
+            return x
+        else:
+            self.d[x] += 1
+            return "%s_%d" % (x, self.d[x])
 
 
 def read_data_from_csv():
@@ -48,17 +61,19 @@ def load_data():
     data = read_data_from_csv()
     data.drop(["CZB_ID", "SC2_rpm", "idseq_sample_name", "sequencing_batch", "viral_status"], axis=1, inplace=True)
     
-    # data_columns = data.columns.to_list()
-    # # print(data.iloc[0][15979], data.iloc[0][15981])
-    # y_columns = ["SC2_PCR"]
-    # X_columns = [item for item in data_columns if item not in y_columns]
-    # X = data[X_columns]
-    # # 15,980 - target column - SC2_PCR
-    # y = data[y_columns]
-    
     # load gene to name as a dict and change the column values
     gene_to_name = load_annotations()
-    data.rename(columns = gene_to_name, inplace = True)
+    data.rename(columns=gene_to_name, inplace=True)
+    # rename duplicate gene name as {'x': ['x1', 'x2', 'x3']}
+    data.rename(columns=renamer(), inplace=True)
+    
+    # print(len(data.columns))
+    # print(len(set(data.columns)))
+    # to find duplicate columns after gene to name change
+    # names = data.columns.to_list()
+    # print(set([x for x in names if names.count(x) > 1]))
+    # with open(NCBI_UNIQUE_GENE_COLUMN_DATA, 'w') as f:
+    #     json.dump(data.columns.to_list(), f)
     
     # Use label encode to encode categorical values 
     # https://www.analyticsvidhya.com/blog/2015/11/easy-methods-deal-categorical-variables-predictive-modeling/?utm_source=blog&utm_medium=Categorical_data_encoding

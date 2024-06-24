@@ -11,6 +11,12 @@ NCBI_PATIENT_METADATA = os.path.join(
     DATASET_DIR, "metatable_with_viral_status.csv"
 )
 NCBI_NSG_GENE_DATA = os.path.join(DATASET_DIR, "swab_gene_counts.csv")
+NCBI_GENE_COLUMN_DATA = os.path.join(
+    DATASET_DIR, "patient_gene_column.csv"
+)
+NCBI_UNIQUE_GENE_COLUMN_DATA = os.path.join(
+    DATASET_DIR, "patient_unique_gene_column.json"
+)
 NCBI_PATIENT_GENE_DATA = os.path.join(
     DATASET_DIR, "patient_gene_merged.csv"
 )

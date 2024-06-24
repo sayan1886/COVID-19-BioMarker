@@ -1,19 +1,10 @@
 from random import randint
 import numpy as np
 
-import shap
-
-import matplotlib.pyplot as plt
-
 from utils import explanations, models, preprocess, feature_selection as fs, sampling
 
 from configs import config
-from utils.constants import (
-    SHAP_EXPLANATION_GLOBAL_PLOT,
-    SHAP_EXPLANATION_BAR_PLOT,
-    SHAP_EXPLANATION_CLUSTER_PLOT,
-    SHAP_EXPLANATION_SCATTER_PLOT
-)
+
 
 
 
@@ -64,50 +55,17 @@ def predict_fn(data):
     return predict(model=model, data=data)
         
 if cfg.explanation.lime:
-    i = randint(0, len(X_test) - 1)
-    # print(X_test[i])
-    # print(np.array(y_test)[i])
+    i = randint(0, len(np.array(X_test)) - 1)
     # chosen_instance = X_test.iloc[i]
-    chosen_instance = X_test[i]
-    explanations.lime_explanations(feature_names=selected_features, X_train=X_train, selected_instance=chosen_instance, 
+    chosen_instance = np.array(X_test)[i]
+    fig, lime_values = explanations.lime_explanations(feature_names=selected_features, X_train=np.array(X_train), selected_instance=chosen_instance, 
                                    predict_fn=predict_fn, py_plot=cfg.explanation.lime_plot)
     
 if cfg.explanation.shap:
-    shap_values=explanations.shap_explanations(model=model, feature_names=selected_features, X_test=X_test)
+    shap_values=explanations.shap_explanations(model=model, feature_names=selected_features, 
+                                               X_test=X_test, y_test=y_test, 
+                                               shap_bar_plot=cfg.explanation.shap_bar_plot,
+                                               shap_cluster=cfg.explanation.shap_cluster,
+                                               shap_scatter=cfg.explanation.shap_scatter,)
     
-    # Plot SHAP summary 
-    fig = shap.summary_plot(shap_values, feature_names=selected_features, show=False)
-    plt.savefig(SHAP_EXPLANATION_GLOBAL_PLOT, dpi=300, bbox_inches='tight')
-    plt.close(fig=fig)
     
-    if cfg.explanation.shap_bar_plot:
-        fig = shap.summary_plot(shap_values, X_test, plot_type="bar", show=False)
-        plt.savefig(SHAP_EXPLANATION_BAR_PLOT, dpi=300, bbox_inches='tight')
-        plt.close(fig=fig)
-        
-    i = randint(0, len(selected_features) - 1)
-    selected_feature = selected_features[i]
-    # print(shap_values)
-    # print(selected_feature)
-    
-    # not working
-    # shap.dependence_plot(X_test[selected_feature] , shap_values, X_test)
-    # shap.summary_plot(shap_values[0], X_test)
-    
-    # not working
-    # gender = (
-    #     X['gender']
-    #     .apply(lambda sex: 'Women' if sex == 0 else 'Men')
-    #     .values
-    # )
-    # shap.plots.bar(shap_values.cohorts(gender).abs.mean(axis=0))
-    
-    if cfg.explanation.shap_cluster:
-        clustering = shap.utils.hclust(X_test, y_test, random_state=42)
-        fig = shap.plots.bar(shap_values, clustering=clustering, clustering_cutoff=0.5, show=False)
-        plt.savefig(SHAP_EXPLANATION_CLUSTER_PLOT, dpi=300, bbox_inches='tight')
-        plt.close(fig=fig)
-    
-    if cfg.explanation.shap_scatter:
-        fig = shap.plots.scatter(shap_values[:, selected_feature], show=False)
-        plt.savefig(SHAP_EXPLANATION_SCATTER_PLOT, dpi=300, bbox_inches='tight')
